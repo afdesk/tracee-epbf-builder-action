@@ -1,0 +1,21 @@
+name: 'The Tracee EBPF build action'
+description: 'This action builds the ebpf program for Tracee'
+inputs:
+  kernelrelease:
+    description: 'kernel version to build the module for'
+    required: true
+    default: '4.18-rc4'
+  probe:
+    description: 'kernel version to build the module for'
+    required: true
+    default: 'trace.ebpf.o'
+
+outputs:
+  probe:
+    description: 'the resulting eBPF probe'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.kernelrelease }}
+    - ${{ inputs.probe }}
